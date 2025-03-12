@@ -1,0 +1,268 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.payment-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.payment-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 8px;
+  color: #424770;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.form-row input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.StripeElement {
+  padding: 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.StripeElement--focus {
+  border-color: #646cff;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.payment-form button {
+  padding: 12px 16px;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.payment-form button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.payment-form button:hover:not(:disabled) {
+  background-color: #535bf2;
+}
+
+.error {
+  color: #fa755a;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.success-message,
+.error-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.success-content,
+.error-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.success-icon,
+.error-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+}
+
+.success-icon svg {
+  color: #4CAF50;
+}
+
+.error-icon svg {
+  color: #f44336;
+}
+
+.success-content h2,
+.error-content h2 {
+  text-align: center;
+  color: #32325d;
+  margin-bottom: 1.5rem;
+}
+
+.success-details,
+.error-details {
+  margin-bottom: 1.5rem;
+}
+
+.amount,
+.payment-id {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.amount span,
+.payment-id span {
+  font-weight: 600;
+  color: #32325d;
+}
+
+.what-next,
+.troubleshooting {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.what-next h3,
+.troubleshooting h3 {
+  color: #32325d;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.what-next ul,
+.troubleshooting ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.what-next li,
+.troubleshooting li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.what-next li:before,
+.troubleshooting li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #4CAF50;
+}
+
+.troubleshooting li:before {
+  content: "•";
+  color: #32325d;
+}
+
+.support {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #6b7c93;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.retry-button,
+.close-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.retry-button {
+  background-color: #646cff;
+  color: white;
+  border: none;
+}
+
+.retry-button:hover {
+  background-color: #535bf2;
+}
+
+.close-button {
+  background-color: transparent;
+  color: #6b7c93;
+  border: 1px solid #e6e6e6;
+}
+
+.close-button:hover {
+  background-color: #f8f9fa;
+}
