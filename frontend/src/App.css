@@ -44,16 +44,17 @@
 .payment-form {
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: white;
+  padding: 2rem;
+  border: 1px solid var(--border-main);
+  border-radius: 12px;
+  background-color: var(--bg-main);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .payment-form form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.5rem;
 }
 
 .form-row {
@@ -62,64 +63,77 @@
 
 .form-row label {
   display: block;
-  margin-bottom: 8px;
-  color: #424770;
-  font-size: 16px;
-  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
   text-align: left;
 }
 
 .form-row input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 0.75rem;
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  transition: all 0.2s ease;
+}
+
+.form-row input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px var(--primary-light);
 }
 
 .StripeElement {
-  padding: 12px;
-  border: 1px solid #e6e6e6;
-  border-radius: 4px;
-  background-color: white;
+  padding: 0.75rem;
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  background-color: var(--bg-main);
+  transition: all 0.2s ease;
 }
 
 .StripeElement--focus {
-  border-color: #646cff;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px var(--primary-light);
 }
 
 .StripeElement--invalid {
-  border-color: #fa755a;
+  border-color: var(--error-main);
 }
 
 .payment-form button {
-  padding: 12px 16px;
-  background-color: #646cff;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-main);
   color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
-  transition: background-color 0.2s ease;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .payment-form button:disabled {
-  background-color: #cccccc;
+  background-color: var(--text-disabled);
   cursor: not-allowed;
 }
 
 .payment-form button:hover:not(:disabled) {
-  background-color: #535bf2;
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
 .error {
-  color: #fa755a;
-  margin-bottom: 10px;
+  color: var(--error-main);
+  margin-bottom: 0.75rem;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
+/* Success and Error Messages */
 .success-message,
 .error-message {
   position: fixed;
@@ -130,73 +144,80 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--bg-overlay);
   z-index: 1000;
+  padding: 1rem;
 }
 
 .success-content,
 .error-content {
-  background: white;
+  background: var(--bg-main);
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 12px;
   max-width: 500px;
   width: 90%;
   text-align: left;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .success-icon,
 .error-icon {
   width: 48px;
   height: 48px;
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.5rem;
 }
 
 .success-icon svg {
-  color: #4CAF50;
+  color: var(--secondary-main);
+  width: 100%;
+  height: 100%;
 }
 
 .error-icon svg {
-  color: #f44336;
+  color: var(--error-main);
+  width: 100%;
+  height: 100%;
 }
 
 .success-content h2,
 .error-content h2 {
   text-align: center;
-  color: #32325d;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .success-details,
 .error-details {
   margin-bottom: 1.5rem;
+  color: var(--text-primary);
 }
 
 .amount,
 .payment-id {
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .amount span,
 .payment-id span {
   font-weight: 600;
-  color: #32325d;
+  color: var(--text-primary);
 }
 
 .what-next,
 .troubleshooting {
   margin-top: 1.5rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 4px;
+  padding: 1.25rem;
+  background: var(--bg-light);
+  border-radius: 8px;
 }
 
 .what-next h3,
 .troubleshooting h3 {
-  color: #32325d;
+  color: var(--text-primary);
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .what-next ul,
@@ -207,62 +228,132 @@
 
 .what-next li,
 .troubleshooting li {
-  margin-bottom: 0.5rem;
-  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.75rem;
   position: relative;
+  color: var(--text-secondary);
 }
 
-.what-next li:before,
-.troubleshooting li:before {
+.what-next li:before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: #4CAF50;
+  color: var(--secondary-main);
 }
 
 .troubleshooting li:before {
   content: "•";
-  color: #32325d;
+  position: absolute;
+  left: 0.5rem;
+  color: var(--text-secondary);
 }
 
 .support {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-main);
   font-size: 0.9rem;
-  color: #6b7c93;
+  color: var(--text-secondary);
 }
 
 .error-actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .retry-button,
 .close-button {
   padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  border-radius: 8px;
   font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .retry-button {
-  background-color: #646cff;
+  background-color: var(--primary-main);
   color: white;
   border: none;
 }
 
 .retry-button:hover {
-  background-color: #535bf2;
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
 .close-button {
   background-color: transparent;
-  color: #6b7c93;
-  border: 1px solid #e6e6e6;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-main);
 }
 
 .close-button:hover {
-  background-color: #f8f9fa;
+  background-color: var(--bg-light);
+  border-color: var(--text-secondary);
+}
+
+.payment-info {
+  background: var(--bg-light);
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.payment-info p {
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-info span {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.status-badge.success {
+  background-color: var(--secondary-light);
+  color: var(--secondary-dark);
+}
+
+.receipt-info {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--bg-light);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.success-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.download-button {
+  background-color: var(--secondary-main);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.download-button:hover {
+  background-color: var(--secondary-dark);
+  transform: translateY(-1px);
 }

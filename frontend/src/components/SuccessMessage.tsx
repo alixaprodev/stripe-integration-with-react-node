@@ -1,12 +1,23 @@
 import React from 'react';
+import { PaymentSuccessData } from '../types/stripe';
 
 interface SuccessMessageProps {
-  amount: number;
-  paymentId?: string;
+  paymentData: PaymentSuccessData;
   onClose: () => void;
 }
 
-const SuccessMessage: React.FC<SuccessMessageProps> = ({ amount, paymentId, onClose }) => {
+const SuccessMessage: React.FC<SuccessMessageProps> = ({ paymentData, onClose }) => {
+  const formatDate = (timestamp: number) => {
+    return new Date(timestamp * 1000).toLocaleString();
+  };
+
+  const formatCurrency = (amount: number, currency: string) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency.toUpperCase(),
+    }).format(amount / 100);
+  };
+
   return (
     <div className="success-message">
       <div className="success-content">
@@ -18,23 +29,43 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({ amount, paymentId, onCl
         </div>
         <h2>Payment Successful!</h2>
         <div className="success-details">
-          <p className="amount">Amount paid: <span>${amount.toFixed(2)}</span></p>
-          {paymentId && <p className="payment-id">Payment ID: <span>{paymentId}</span></p>}
-          <p className="message">
-            Thank you for your payment. We have sent a confirmation email with the transaction details.
-          </p>
+          <div className="payment-info">
+            <p className="amount">
+              Amount paid: <span>{formatCurrency(paymentData.amount, paymentData.currency)}</span>
+            </p>
+            <p className="payment-id">
+              Payment ID: <span>{paymentData.paymentId}</span>
+            </p>
+            <p className="payment-date">
+              Date: <span>{formatDate(paymentData.created)}</span>
+            </p>
+            <p className="payment-method">
+              Payment Method: <span>{paymentData.paymentMethod}</span>
+            </p>
+            <p className="payment-status">
+              Status: <span className="status-badge success">{paymentData.status}</span>
+            </p>
+          </div>
           <div className="what-next">
             <h3>What's Next?</h3>
             <ul>
-              <li>You will receive a confirmation email shortly</li>
+              <li>A confirmation email will be sent to your email address</li>
               <li>Your payment will be processed within 24 hours</li>
               <li>You can view your transaction history in your account</li>
             </ul>
           </div>
+          <div className="receipt-info">
+            <p>Need a receipt? You can download it from your email or account dashboard.</p>
+          </div>
         </div>
-        <button className="close-button" onClick={onClose}>
-          Close
-        </button>
+        <div className="success-actions">
+          <button className="download-button">
+            Download Receipt
+          </button>
+          <button className="close-button" onClick={onClose}>
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

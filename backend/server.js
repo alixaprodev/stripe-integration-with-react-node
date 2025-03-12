@@ -19,9 +19,13 @@ app.post('/api/create-payment-intent', async (req, res) => {
   try {
     const { amount } = req.body;
 
+    if (!amount || amount <= 0) {
+      return res.status(400).json({ error: 'Invalid amount' });
+    }
+
     // Create payment intent
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount * 100, // Convert to cents
+      amount: Math.round(amount * 100), // Convert to cents and ensure it's an integer
       currency: 'usd',
       // Add automatic payment methods
       automatic_payment_methods: {
@@ -31,7 +35,7 @@ app.post('/api/create-payment-intent', async (req, res) => {
 
     res.json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error('Error creating payment intent:', error);
     res.status(500).json({ error: error.message });
   }
 });

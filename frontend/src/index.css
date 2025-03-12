@@ -1,11 +1,45 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Primary colors */
+  --primary-main: #6772e5;
+  --primary-dark: #5469d4;
+  --primary-light: #7795f8;
+
+  /* Secondary colors */
+  --secondary-main: #24b47e;
+  --secondary-dark: #0a965d;
+  --secondary-light: #32d296;
+
+  /* Error colors */
+  --error-main: #fa755a;
+  --error-dark: #e25950;
+  --error-light: #ffa27b;
+
+  /* Text colors */
+  --text-primary: #1a1f36;
+  --text-secondary: #697386;
+  --text-disabled: #a3acb9;
+
+  /* Background colors */
+  --bg-main: #ffffff;
+  --bg-light: #f7fafc;
+  --bg-dark: #1a1f36;
+  --bg-overlay: rgba(26, 31, 54, 0.5);
+  --input-bg: #ffffff;
+  --card-bg: #ffffff;
+
+  /* Border colors */
+  --border-main: #e6ebf1;
+  --border-focus: #6772e5;
+  --border-error: #fa755a;
+
+  /* System */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-primary);
+  background-color: var(--bg-light);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +49,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary-main);
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: var(--primary-dark);
 }
 
 body {
@@ -28,41 +63,427 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--bg-light);
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: var(--text-primary);
 }
 
 button {
+  padding: 0.875rem 1.5rem;
+  background-color: var(--primary-main);
+  color: white;
+  border: none;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
-@media (prefers-color-scheme: light) {
+button:disabled {
+  background-color: var(--text-disabled);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --bg-main: #1a1f36;
+    --bg-light: #242b42;
+    --text-primary: #ffffff;
+    --text-secondary: #a5b1c9;
+    --border-main: #2d3555;
+    --input-bg: #242b42;
+    --card-bg: #1e2642;
   }
-  a:hover {
-    color: #747bff;
+
+  body {
+    background-color: var(--bg-dark);
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .success-content,
+  .error-content {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+  
+  .status-badge.success {
+    background-color: rgba(36, 180, 126, 0.15);
+  }
+  
+  .close-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .payment-form {
+    background-color: var(--bg-main);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .form-row input,
+  .card-element .StripeElement {
+    background-color: var(--input-bg);
+    border-color: var(--border-main);
+  }
+
+  .form-row input:hover,
+  .card-element .StripeElement:hover {
+    border-color: var(--text-secondary);
+  }
+
+  .form-row input:focus,
+  .card-element .StripeElement--focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 1px var(--primary-light);
+  }
+}
+
+.payment-form {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  border: 1px solid var(--border-main);
+  border-radius: 16px;
+  background-color: var(--bg-main);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.payment-form h2 {
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.payment-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  margin-bottom: 1.5rem;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.form-row input {
+  width: 100%;
+  padding: 0.875rem;
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--input-bg);
+  transition: all 0.2s ease;
+  height: 42px;
+}
+
+.form-row input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 1px var(--primary-light);
+}
+
+/* Card element styles */
+.card-element {
+  background-color: var(--input-bg);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.card-element .StripeElement {
+  padding: 0.875rem;
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  height: 42px;
+  background-color: var(--input-bg);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.card-element .StripeElement > div {
+  width: 100%;
+}
+
+.card-element .StripeElement iframe {
+  margin: 0 auto;
+  display: block;
+}
+
+.card-element .StripeElement--focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 1px var(--primary-light);
+}
+
+.card-element .StripeElement--invalid {
+  border-color: var(--error-main);
+}
+
+.card-element-info {
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.success-message,
+.error-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-overlay);
+  z-index: 1000;
+  padding: 1.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.success-content,
+.error-content {
+  background: var(--bg-main);
+  padding: 2.5rem;
+  border-radius: 16px;
+  max-width: 550px;
+  width: 90%;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.success-icon,
+.error-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 2rem;
+  color: var(--secondary-main);
+}
+
+.error-icon {
+  color: var(--error-main);
+}
+
+.success-content h2,
+.error-content h2 {
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.payment-info {
+  background: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-main);
+}
+
+.payment-info p {
+  margin: 0.75rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.payment-info span {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.status-badge {
+  padding: 0.375rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+
+.status-badge.success {
+  background-color: rgba(36, 180, 126, 0.1);
+  color: var(--secondary-main);
+}
+
+.what-next {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-light);
+  border-radius: 12px;
+  border: 1px solid var(--border-main);
+}
+
+.what-next h3 {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.what-next ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.what-next li {
+  margin-bottom: 0.875rem;
+  padding-left: 2rem;
+  position: relative;
+  color: var(--text-secondary);
+}
+
+.what-next li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--secondary-main);
+  font-weight: bold;
+}
+
+.success-actions,
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.success-actions button,
+.error-actions button {
+  flex: 1;
+}
+
+.download-button {
+  background-color: var(--secondary-main);
+}
+
+.download-button:hover {
+  background-color: var(--secondary-dark);
+}
+
+.close-button {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-main);
+}
+
+.close-button:hover {
+  background-color: var(--bg-light);
+  border-color: var(--text-secondary);
+  transform: translateY(-1px);
+}
+
+.card-element-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.card-field {
+  height: 40px;
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  background-color: var(--bg-main);
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.card-element-container .StripeElement {
+  height: 100%;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+}
+
+.card-element-container .StripeElement.focused {
+  background-color: var(--bg-main);
+}
+
+.card-element-container .StripeElement.invalid {
+  background-color: var(--bg-main);
+}
+
+.card-element-container .StripeElement.empty {
+  background-color: var(--bg-main);
+}
+
+.card-element-info {
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+/* Form input improvements */
+.form-row input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  height: 40px;
+}
+
+.form-row input[type="number"]::-webkit-outer-spin-button,
+.form-row input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-row input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .payment-form {
+    padding: 1.5rem;
+  }
+
+  .form-row input,
+  .card-element-container .StripeElement {
+    padding: 0.75rem;
+  }
+}
+
+/* Loading spinner */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
