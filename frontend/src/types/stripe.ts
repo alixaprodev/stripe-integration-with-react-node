@@ -24,4 +24,40 @@ export interface PaymentSuccessData {
   paymentMethod: string;
   currency: string;
   status: string;
+}
+
+export interface CardElementOptions {
+  style: {
+    base: {
+      color: string;
+      fontFamily: string;
+      fontSize: string;
+      textAlign: string;
+      '::placeholder': {
+        color: string;
+      };
+    };
+    invalid: {
+      color: string;
+      iconColor: string;
+    };
+  };
+}
+
+export interface FormState {
+  amount: number;
+  loading: boolean;
+  error: string | null;
+  paymentData: PaymentSuccessData | null;
+}
+
+export interface ErrorMessageProps {
+  message: string;
+  onRetry: () => void;
+  onClose: () => void;
+}
+
+export interface SuccessMessageProps {
+  paymentData: PaymentSuccessData;
+  onClose: () => void;
 } 
